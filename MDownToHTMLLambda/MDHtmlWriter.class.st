@@ -18,6 +18,16 @@ MDHtmlWriter >> runOn: aPMdDocument [
 ]
 
 { #category : #'as yet unclassified' }
+MDHtmlWriter >> visitAnchor: aPMdAnchor with: aWriteStream [ 
+	aWriteStream << '<a href="'.
+	aPMdAnchor url accept: self with: aWriteStream.
+	aWriteStream << '">'.
+	aPMdAnchor altText accept: self with: aWriteStream.
+	aWriteStream << '</a>'.
+	
+]
+
+{ #category : #'as yet unclassified' }
 MDHtmlWriter >> visitDocument: aPMdDocument with: aStream [ 
 	aStream << '<article>'. 
 	aPMdDocument contentsDo: [ :c | c accept: self with: aStream ].
@@ -33,6 +43,15 @@ MDHtmlWriter >> visitEm: aPMdEm with: aWriteStream [
 ]
 
 { #category : #'as yet unclassified' }
+MDHtmlWriter >> visitImage: aPMdImage with: aWriteStream [ 
+	aWriteStream << '<img src="'.
+	aPMdImage url accept: self with: aWriteStream.
+	aWriteStream << '" alt="'.
+	aPMdImage altText accept: self with: aWriteStream.
+	aWriteStream << '">'.
+]
+
+{ #category : #'as yet unclassified' }
 MDHtmlWriter >> visitParagraph: aPMdParagraph with: aWriteStream [ 
 	aWriteStream << '<p>'.
 	aPMdParagraph contentsDo: [ :c | c accept: self with: aWriteStream ].
@@ -42,6 +61,13 @@ MDHtmlWriter >> visitParagraph: aPMdParagraph with: aWriteStream [
 { #category : #'as yet unclassified' }
 MDHtmlWriter >> visitString: aPMdString with: aWriteStream [
 	aWriteStream << aPMdString string
+]
+
+{ #category : #'as yet unclassified' }
+MDHtmlWriter >> visitStrong: aPMdStrong with: aWriteStream [ 
+	aWriteStream << '<strong>';
+	<< aPMdStrong string;
+	<< '</strong>'
 ]
 
 { #category : #'as yet unclassified' }

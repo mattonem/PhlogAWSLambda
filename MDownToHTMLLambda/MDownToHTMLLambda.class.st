@@ -10,6 +10,6 @@ MDownToHTMLLambda class >> action: request [
 	json := NeoJSONReader fromString: request contents.
 	parsed := PPMarkdown parse: (json at: #payload ).
 	result := NeoJSONObject new.
-	result at: #result put: (MDHtmlWriter on: parsed) .
+	result at: #payload put: (MDHtmlWriter on: parsed) .
 	^ result asString.
 ]
