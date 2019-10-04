@@ -13,7 +13,7 @@ BaselineOfMDownToHTMLLambda >> baseline: spec [
 				baseline: 'AwsLambda'
 				with: [ spec
 						repository: 'github://mattonem/Pharo-AWSLambda';
-						loads: #default ].
+						loads: #core ].
 			spec
 				baseline: 'NeoJSON'
 				with: [ spec
