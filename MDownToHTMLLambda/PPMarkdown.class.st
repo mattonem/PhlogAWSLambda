@@ -79,7 +79,7 @@ PPMarkdown >> textGroup [
 
 { #category : #grammar }
 PPMarkdown >> title [
-	^ $# asParser, paragraph  ==> [ :node | PMdTitle from: node ]
+	^ $# asParser, text  ==> [ :node | PMdTitle from: node ]
 ]
 
 { #category : #grammar }
