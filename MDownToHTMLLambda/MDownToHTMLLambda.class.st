@@ -6,5 +6,8 @@ Class {
 
 { #category : #accessing }
 MDownToHTMLLambda class >> action: request [
-	^request contents
+	| json parsed |
+	json := NeoJSONReader fromString: request contents.
+	parsed := PPMarkdown parse: (json at: #payload ).
+	^ '["parsedOK"]'
 ]

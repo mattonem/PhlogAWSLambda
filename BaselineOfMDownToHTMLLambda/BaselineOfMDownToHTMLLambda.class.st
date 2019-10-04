@@ -15,6 +15,11 @@ BaselineOfMDownToHTMLLambda >> baseline: spec [
 						repository: 'github://mattonem/Pharo-AWSLambda';
 						loads: #default ].
 			spec
+				baseline: 'NeoJSON'
+				with: [ spec
+						repository: 'github://svenvc/NeoJSON/repository';
+						loads: #core ].
+			spec
 				baseline: 'PetitParser'
 				with: [ spec
 						repository: 'github://moosetechnology/PetitParser/src';
