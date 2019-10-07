@@ -27,5 +27,5 @@ BaselineOfS3RestLambda >> baseline: spec [
 			spec
 				package: 'S3RestLambdaPost'
 				with: [ spec requires: #('AwsLambda' NeoJSON) ].
-			spec group: #post with: S3RestLambdaPost ]
+			spec group: #post with: 'S3RestLambdaPost' ]
 ]
