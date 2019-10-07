@@ -34,6 +34,7 @@ S3RestLambdaPost class >> bucketName [
 { #category : #accessing }
 S3RestLambdaPost class >> initLambda [
 	| s3 |
+	Stdio stderr << 'S3 >> initLambda'; lf.
 	super initLambda.
 	AWSS3Config default
 		accessKeyId: self S3AccessKeyId;
