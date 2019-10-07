@@ -25,6 +25,7 @@ S3RestLambdaPost class >> initLambda [
 	AWSS3Config default
 		accessKeyId: self s3AccessKeyId;
 		secretKey: self s3secreteKey;
+		sessionToken: self sessionToken;
 		regionName: self region.
 	Stdio stderr << 'S3 >> initLambda aws ok'; lf.
 	s3 := AWSS3 new.
@@ -56,4 +57,9 @@ S3RestLambdaPost class >> s3AccessKeyId [
 { #category : #accessing }
 S3RestLambdaPost class >> s3secreteKey [
 	^ OSEnvironment current at: 'AWS_SECRET_ACCESS_KEY'
+]
+
+{ #category : #accessing }
+S3RestLambdaPost class >> sessionToken [
+	^ OSEnvironment current at: 'AWS_SESSION_TOKEN'
 ]
