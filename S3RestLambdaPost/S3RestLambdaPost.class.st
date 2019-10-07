@@ -31,6 +31,7 @@ S3RestLambdaPost class >> initLambda [
 	Stdio stderr << 'S3AccessKeyId: ' << self S3AccessKeyId ; lf.
 	Stdio stderr << 'S3secreteKey: ' << self S3secreteKey ; lf.
 	Stdio stderr << 'bucketNamed: ' << self bucketName ; lf.
+	Stdio stderr << 'regionName: ' << self region ; lf.
 	AWSS3Config default
 		accessKeyId: self S3AccessKeyId;
 		secretKey: self S3secreteKey;
