@@ -18,15 +18,6 @@ S3RestLambdaPost class >> S3secreteKey [
 ]
 
 { #category : #accessing }
-S3RestLambdaPost class >> action: aRequest [
-	Stdio stderr << 'action' ; lf.
-	bucket
-		atKey: UUID new asString
-		putObject: aRequest contents.
-	^ aRequest contents
-]
-
-{ #category : #accessing }
 S3RestLambdaPost class >> bucketName [
 	^ OSEnvironment current at: 'BUCKET_NAME'
 ]
@@ -50,6 +41,15 @@ S3RestLambdaPost class >> initLambda [
 	bucket := s3 bucketNamed: self bucketName.
 	Stdio stderr << 'S3 >> initLambda bucket ok'; lf.
 
+]
+
+{ #category : #accessing }
+S3RestLambdaPost class >> lambdaAction: aRequest [
+	Stdio stderr << 'action' ; lf.
+	bucket
+		atKey: UUID new asString
+		putObject: aRequest contents.
+	^ aRequest contents
 ]
 
 { #category : #accessing }
