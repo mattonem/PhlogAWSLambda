@@ -36,15 +36,20 @@ S3RestLambdaPost class >> initLambda [
 	| s3 |
 	Stdio stderr << 'S3 >> initLambda'; lf.
 	super initLambda.
+	Stdio stderr << 'S3 >> initLambda super ok'; lf.
+	Stdio stderr << 'S3AccessKeyId: ' << self S3AccessKeyId ; lf.
+	Stdio stderr << 'S3secreteKey: ' << self S3secreteKey ; lf.
+	Stdio stderr << 'bucketNamed: ' << self bucketName ; lf.
 	AWSS3Config default
 		accessKeyId: self S3AccessKeyId;
 		secretKey: self S3secreteKey;
 		regionName: self region.
+	Stdio stderr << 'S3 >> initLambda aws ok'; lf.
 	s3 := AWSS3 new.
+	Stdio stderr << 'S3 >> initLambda s3 ok'; lf.
 	bucket := s3 bucketNamed: self bucketName.
-	Stdio stderr << 'S3AccessKeyId: ' << self S3AccessKeyId ; lf.
-	Stdio stderr << 'S3secreteKey: ' << self S3secreteKey ; lf.
-	Stdio stderr << 'bucketNamed: ' << self bucketName ; lf.
+	Stdio stderr << 'S3 >> initLambda bucket ok'; lf.
+
 ]
 
 { #category : #accessing }
