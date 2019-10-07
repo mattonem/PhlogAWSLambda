@@ -19,6 +19,7 @@ S3RestLambdaPost class >> S3secreteKey [
 
 { #category : #accessing }
 S3RestLambdaPost class >> action: aRequest [
+	Stdio stderr << 'action' ; lf.
 	bucket
 		atKey: UUID new asString
 		putObject: aRequest contents.
