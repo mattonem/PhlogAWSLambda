@@ -41,6 +41,9 @@ S3RestLambdaPost class >> initLambda [
 		regionName: self region.
 	s3 := AWSS3 new.
 	bucket := s3 bucketNamed: self bucketName.
+	Stdio stderr << 'S3AccessKeyId: ' << self S3AccessKeyId ; lf.
+	Stdio stderr << 'S3secreteKey: ' << self S3secreteKey ; lf.
+	Stdio stderr << 'bucketNamed: ' << self bucketName ; lf.
 ]
 
 { #category : #accessing }
