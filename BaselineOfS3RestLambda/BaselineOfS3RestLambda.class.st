@@ -19,12 +19,13 @@ BaselineOfS3RestLambda >> baseline: spec [
 				with: [ spec
 						repository: 'github://svenvc/NeoJSON/repository';
 						loads: #core ].
-					spec
+			spec
 				baseline: 'AWS'
 				with: [ spec
 						repository: 'github://newapplesho/aws-sdk-smalltalk/pharo-repository';
 						loads: #'AWS-S3' ].
 			spec
-				package: 'S3RestLambda'
-				with: [ spec requires: #('AwsLambda' NeoJSON) ] ]
+				package: 'S3RestLambdaPost'
+				with: [ spec requires: #('AwsLambda' NeoJSON) ].
+			spec group: #post with: S3RestLambdaPost ]
 ]
