@@ -25,7 +25,13 @@ BaselineOfS3RestLambda >> baseline: spec [
 						repository: 'github://mattonem/aws-sdk-smalltalk/pharo-repository';
 						loads: #'AWS-S3' ].
 			spec
+				package: 'S3RestLambda'
+					with: [ spec requires: #('AwsLambda' AWS NeoJSON) ];
+				package: 'S3RestLambdaPut'
+					with: [ spec requires: #('S3RestLambda') ];
 				package: 'S3RestLambdaPost'
-				with: [ spec requires: #('AwsLambda' AWS NeoJSON) ].
-			spec group: #post with: 'S3RestLambdaPost' ]
+					with: [ spec requires: #('S3RestLambda') ].
+			spec
+				group: #post with: 'S3RestLambdaPost';
+				group: #put with: 'S3RestLambdaPut' ]
 ]
