@@ -1,6 +1,9 @@
 Class {
 	#name : #S3RestLambda,
 	#superclass : #Lambda,
+	#classInstVars : [
+		'bucket'
+	],
 	#category : #S3RestLambda
 }
 
