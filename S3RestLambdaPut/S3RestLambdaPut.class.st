@@ -9,10 +9,14 @@ Class {
 
 { #category : #accessing }
 S3RestLambdaPut class >> lambdaAction: aRequest [
-	| json result |
+	| json id result payload |
 	json := NeoJSONReader fromString: aRequest contents.
-	bucket atKey: (json at: #id) putObject: (json at: #paylaod).
+	payload := (json at: #payload).
+	id := (json at: #id).
+	bucket atKey: id putObject: payload asString.
 	result := NeoJSONObject new.
-	result at: #payload put: json.
+	result
+		at: #payload put: payload;
+		at: #id put: id.
 	^ result asString
 ]
