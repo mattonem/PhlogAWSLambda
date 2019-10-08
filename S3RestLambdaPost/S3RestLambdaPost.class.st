@@ -12,7 +12,7 @@ S3RestLambdaPost class >> lambdaAction: aRequest [
 	| json id result |
 	json := NeoJSONReader fromString: aRequest contents.
 	id := UUID new asString.
-	bucket atKey: UUID new asString putObject: (json at: #payload).
+	bucket atKey: id putObject: (json at: #payload).
 	result := NeoJSONObject new.
 	result
 		at: #payload put: json;
