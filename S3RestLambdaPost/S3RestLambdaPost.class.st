@@ -2,7 +2,7 @@ Class {
 	#name : #S3RestLambdaPost,
 	#superclass : #S3RestLambda,
 	#classInstVars : [
-		'bucket'
+		'qqq'
 	],
 	#category : #S3RestLambdaPost
 }
