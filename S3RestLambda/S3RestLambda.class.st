@@ -14,25 +14,20 @@ S3RestLambda class >> bucketName [
 
 { #category : #accessing }
 S3RestLambda class >> initLambda [
-	| s3 |
-	Stdio stderr << 'S3 >> initLambda'; lf.
 	super initLambda.
-	Stdio stderr << 'S3 >> initLambda super ok'; lf.
-	Stdio stderr << 'S3AccessKeyId: ' << self s3AccessKeyId ; lf.
-	Stdio stderr << 'S3secreteKey: ' << self s3secreteKey ; lf.
-	Stdio stderr << 'bucketNamed: ' << self bucketName ; lf.
-	Stdio stderr << 'regionName: ' << self region ; lf.
 	AWSS3Config default
 		accessKeyId: self s3AccessKeyId;
 		secretKey: self s3secreteKey;
 		sessionToken: self sessionToken;
 		regionName: self region.
-	Stdio stderr << 'S3 >> initLambda aws ok'; lf.
-	s3 := AWSS3 new.
-	Stdio stderr << 'S3 >> initLambda s3 ok'; lf.
-	bucket := s3 bucketNamed: self bucketName.
-	Stdio stderr << 'S3 >> initLambda bucket ok'; lf.
+	self initializeBucket: self bucketName.
+]
 
+{ #category : #accessing }
+S3RestLambda class >> initializeBucket: bucketName [
+	| s3 |
+	s3 := AWSS3 new.
+	bucket := s3 bucketNamed: bucketName
 ]
 
 { #category : #accessing }
