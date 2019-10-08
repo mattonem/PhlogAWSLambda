@@ -29,9 +29,12 @@ BaselineOfS3RestLambda >> baseline: spec [
 					with: [ spec requires: #('AwsLambda' AWS NeoJSON) ];
 				package: 'S3RestLambdaPut'
 					with: [ spec requires: #('S3RestLambda') ];
+				package: 'S3RestLambdaDelete'
+					with: [ spec requires: #('S3RestLambda') ];
 				package: 'S3RestLambdaPost'
 					with: [ spec requires: #('S3RestLambda') ].
 			spec
 				group: #post with: 'S3RestLambdaPost';
+				group: #delete with: 'S3RestLambdaDelete';
 				group: #put with: 'S3RestLambdaPut' ]
 ]
