@@ -22,14 +22,17 @@ BaselineOfS3RestLambda >> baseline: spec [
 			spec
 				baseline: 'AWS'
 				with: [ spec
-						repository: 'github://newapplesho/aws-sdk-smalltalk/pharo-repository';
-						loads: #'AWS-S3' ].
+						repository: 'github://newapplesho/aws-sdk-smalltalk/pharo-repository' ].
+			spec
+				project: 'AWS-S3'
+				copyFrom: 'AWS'
+				with: [ spec loads: #('AWS-S3') ].
 			spec
 				package: 'S3RestLambda'
-					with: [ spec requires: #('AwsLambda' AWS NeoJSON) ];
+					with: [ spec requires: #('AwsLambda' 'AWS-S3' NeoJSON) ];
 				package: 'S3RestLambdaPut'
 					with: [ spec requires: #('S3RestLambda') ];
-					package: 'S3RestLambdaGet'
+				package: 'S3RestLambdaGet'
 					with: [ spec requires: #('S3RestLambda') ];
 				package: 'S3RestLambdaDelete'
 					with: [ spec requires: #('S3RestLambda') ];
