@@ -12,7 +12,7 @@ BaselineOfS3RestLambda >> baseline: spec [
 		do: [ spec
 				baseline: 'AwsLambda'
 				with: [ spec
-						repository: 'github://mattonem/Pharo-AWSLambda';
+						repository: 'github://mattonem/Pharo-AWS-Lambda-Runtime';
 						loads: #core ].
 			spec
 				baseline: 'NeoJSON'
