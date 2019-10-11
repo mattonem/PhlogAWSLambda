@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #accessing }
-S3RestLambdaGet class >> lambdaAction: aRequest [
+S3RestLambdaGet >> lambdaAction: aRequest [
 	| json id result payload |
 	json := NeoJSONReader fromString: aRequest contents.
 	id := (json at: #id).

@@ -8,7 +8,7 @@ Class {
 }
 
 { #category : #accessing }
-S3RestLambdaPut class >> lambdaAction: aRequest [
+S3RestLambdaPut >> lambdaAction: aRequest [
 	| json id result payload |
 	json := NeoJSONReader fromString: aRequest contents.
 	payload := (json at: #payload).

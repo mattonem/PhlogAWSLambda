@@ -1,20 +1,19 @@
 Class {
 	#name : #S3RestLambda,
 	#superclass : #LambdaCommandLineHandler,
-	#classInstVars : [
-		'bucket',
-		'prefix'
+	#instVars : [
+		'bucket'
 	],
 	#category : #S3RestLambda
 }
 
 { #category : #accessing }
-S3RestLambda class >> bucketName [
+S3RestLambda >> bucketName [
 	^ OSEnvironment current at: 'BUCKET_NAME'
 ]
 
 { #category : #accessing }
-S3RestLambda class >> initLambda [
+S3RestLambda >> initLambda [
 	super initLambda.
 	AWSS3Config default
 		accessKeyId: self s3AccessKeyId;
@@ -25,28 +24,28 @@ S3RestLambda class >> initLambda [
 ]
 
 { #category : #accessing }
-S3RestLambda class >> initializeBucket: bucketName [
+S3RestLambda >> initializeBucket: bucketName [
 	| s3 |
 	s3 := AWSS3 new.
 	bucket := s3 bucketNamed: bucketName
 ]
 
 { #category : #accessing }
-S3RestLambda class >> region [
+S3RestLambda >> region [
 	^ OSEnvironment current at: 'AWS_REGION'
 ]
 
 { #category : #accessing }
-S3RestLambda class >> s3AccessKeyId [
+S3RestLambda >> s3AccessKeyId [
 	^ OSEnvironment current at: 'AWS_ACCESS_KEY_ID'
 ]
 
 { #category : #accessing }
-S3RestLambda class >> s3secreteKey [
+S3RestLambda >> s3secreteKey [
 	^ OSEnvironment current at: 'AWS_SECRET_ACCESS_KEY'
 ]
 
 { #category : #accessing }
-S3RestLambda class >> sessionToken [
+S3RestLambda >> sessionToken [
 	^ OSEnvironment current at: 'AWS_SESSION_TOKEN'
 ]

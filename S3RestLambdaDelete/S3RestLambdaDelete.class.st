@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #accessing }
-S3RestLambdaDelete class >> lambdaAction: aRequest [
+S3RestLambdaDelete >> lambdaAction: aRequest [
 	| json id result |
 	json := NeoJSONReader fromString: aRequest contents.
 	id := (json at: #id).
