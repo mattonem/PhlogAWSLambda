@@ -1,6 +1,6 @@
 Class {
 	#name : #MDownToHTMLLambda,
-	#superclass : #Lambda,
+	#superclass : #LambdaCommandLineHandler,
 	#category : #MDownToHTMLLambda
 }
 
