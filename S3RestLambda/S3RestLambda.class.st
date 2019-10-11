@@ -1,6 +1,6 @@
 Class {
 	#name : #S3RestLambda,
-	#superclass : #Lambda,
+	#superclass : #LambdaCommandLineHandler,
 	#classInstVars : [
 		'bucket',
 		'prefix'
