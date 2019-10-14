@@ -41,7 +41,7 @@ S3RestLambdaGet >> lambdaClient: aClient [
 { #category : #accessing }
 S3RestLambdaGet >> toHtml: aPayload [
 	aPayload at: #jsonPath put: '.payload.content'.
-	^ (lambdaClient
+	^ NeoJSONReader fromString: (lambdaClient
 		invokeRequest: 'MDownToHTMLLambda'
 		withPayload: (NeoJSONWriter toString: aPayload)) contents
 ]
