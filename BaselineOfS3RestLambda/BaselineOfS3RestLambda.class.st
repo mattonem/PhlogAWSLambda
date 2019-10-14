@@ -22,7 +22,7 @@ BaselineOfS3RestLambda >> baseline: spec [
 			spec
 				baseline: 'AWS'
 				with: [ spec
-						repository: 'github://mattonem/aws-sdk-smalltalk/pharo-repository:AWS-Lambda' ].
+						repository: 'github://mattonem/aws-sdk-smalltalk:AWS-Lambda/pharo-repository' ].
 			spec
 				project: 'AWS-S3'
 				copyFrom: 'AWS'
