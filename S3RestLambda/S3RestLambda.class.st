@@ -1,3 +1,22 @@
+"
+LambdaCommandLineHandler cleanBuilds.
+[ |dir|
+dir := LambdaCommandLineHandler buildRepo: 'github://mattonem/PhlogAWSLambda' baseline: 'BaselineOfS3RestLambda' group: 'post' lambdaClass: 'S3RestLambdaPost' .
+LambdaCommandLineHandler deployFunction: 'S3RestLambdaPost' fromDirectory: dir] fork.
+[|dir|
+	dir := LambdaCommandLineHandler buildRepo: 'github://mattonem/PhlogAWSLambda' baseline: 'BaselineOfS3RestLambda' group: 'put' lambdaClass: 'S3RestLambdaPut' .
+LambdaCommandLineHandler deployFunction: 'S3RestLambdaPut' fromDirectory: dir] fork.
+[|dir|
+	dir := LambdaCommandLineHandler buildRepo: 'github://mattonem/PhlogAWSLambda' baseline: 'BaselineOfS3RestLambda' group: 'get' lambdaClass: 'S3RestLambdaGet' .
+LambdaCommandLineHandler deployFunction: 'S3RestLambdaGet' fromDirectory: dir] fork.
+[|dir|
+	dir := LambdaCommandLineHandler buildRepo: 'github://mattonem/PhlogAWSLambda' baseline: 'BaselineOfS3RestLambda' group: 'delete' lambdaClass: 'S3RestLambdaDelete' .
+LambdaCommandLineHandler deployFunction: 'S3RestLambdaDelete' fromDirectory: dir] fork.
+[|dir|
+	dir := LambdaCommandLineHandler buildRepo: 'github://mattonem/PhlogAWSLambda' baseline: 'BaselineOfMDownToHTMLLambda' group: 'default' lambdaClass: 'MDownToHTMLLambda' .
+LambdaCommandLineHandler deployFunction: 'MDownToHTMLLambda' fromDirectory: dir] fork.
+
+"
 Class {
 	#name : #S3RestLambda,
 	#superclass : #LambdaCommandLineHandler,
