@@ -16,5 +16,5 @@ MDownToHTMLLambda >> lambdaAction: request [
 	result := json.
 	path allButLastDo: [ :aLevel | result := result at: aLevel ].
 	result at: path last put: (MDHtmlWriter on: parsed) .
-	^ json asJsonString .
+	^ NeoJSONWriter toString: json.
 ]
