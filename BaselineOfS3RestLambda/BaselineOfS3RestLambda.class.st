@@ -38,6 +38,8 @@ BaselineOfS3RestLambda >> baseline: spec [
 					with: [ spec requires: #('S3RestLambda') ];
 				package: 'S3RestLambdaGet'
 					with: [ spec requires: #('S3RestLambda' 'AWS-Lambda') ];
+				package: 'S3RestLambdaList'
+					with: [ spec requires: #('S3RestLambda' 'AWS-Lambda') ];
 				package: 'S3RestLambdaDelete'
 					with: [ spec requires: #('S3RestLambda') ];
 				package: 'S3RestLambdaPost'
@@ -46,5 +48,6 @@ BaselineOfS3RestLambda >> baseline: spec [
 				group: #post with: 'S3RestLambdaPost';
 				group: #delete with: 'S3RestLambdaDelete';
 				group: #get with: 'S3RestLambdaGet';
+				group: #list with: 'S3RestLambdaList';
 				group: #put with: 'S3RestLambdaPut' ]
 ]
