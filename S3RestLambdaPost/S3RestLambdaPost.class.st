@@ -13,6 +13,7 @@ S3RestLambdaPost >> lambdaAction: json [
 	collection := (json at: #collection).
 	payload := (json at: #payload).
 	id := collection, '/' , UUID new asString.
+	payload at: #id put: id.
 	bucket atKey: id putObject: (NeoJSONWriter toString: payload).
 	self updateLastUpdateTime: collection.
 	result := NeoJSONObject new.
