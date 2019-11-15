@@ -2,7 +2,8 @@ Class {
 	#name : #S3RestLambdaGet,
 	#superclass : #S3RestLambda,
 	#instVars : [
-		'lambdaClient'
+		'lambdaClient',
+		'indexes'
 	],
 	#category : #S3RestLambdaGet
 }
@@ -19,11 +20,19 @@ S3RestLambdaGet >> initLambda [
 ]
 
 { #category : #accessing }
+S3RestLambdaGet >> initialize [ 	
+	indexes := Dictionary new.
+]
+
+{ #category : #accessing }
 S3RestLambdaGet >> lambdaAction: json [
-	| id payload format response |
+	| id payload format response collection index |
 	id := json at: #id.
+	collection := (id findTokens:'/') first.
 	format := json at: #format ifAbsent: 'raw'.
-	payload := NeoJSONReader fromString: (bucket getObject: id).
+	index := indexes at: collection ifAbsentPut: [ self newIndexBucket: bucket collection: collection 	].
+	payload := index at: id.
+	"payload := NeoJSONReader fromString: (bucket getObject: id)."
 	response := Dictionary new.
 	response
 		at: #payload put: payload;
@@ -39,6 +48,11 @@ S3RestLambdaGet >> lambdaAction: json [
 { #category : #accessing }
 S3RestLambdaGet >> lambdaClient: aClient [
 	lambdaClient := aClient
+]
+
+{ #category : #indexes }
+S3RestLambdaGet >> newIndexBucket: aBucketMock collection: collection [ 
+	^ S3RestIndex in: aBucketMock for: collection value: #id.
 ]
 
 { #category : #accessing }
