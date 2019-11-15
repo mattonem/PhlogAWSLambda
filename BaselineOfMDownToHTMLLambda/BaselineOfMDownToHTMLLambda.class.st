@@ -14,11 +14,7 @@ BaselineOfMDownToHTMLLambda >> baseline: spec [
 				with: [ spec
 						repository: 'github://mattonem/Pharo-AWS-Lambda-Runtime';
 						loads: #core ].
-			spec
-				baseline: 'NeoJSON'
-				with: [ spec
-						repository: 'github://svenvc/NeoJSON/repository';
-						loads: #core ].
+			
 			spec
 				baseline: 'PetitParser'
 				with: [ spec
