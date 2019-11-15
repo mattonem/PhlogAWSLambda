@@ -7,6 +7,7 @@ Class {
 { #category : #accessing }
 S3RestLambdaGetId >> lambdaAction: json [
 	| id payload format response collection index |
+	Stdio stderr << 'start getId'.
 	id := json at: #id.
 	collection := (id findTokens:'/') first.
 	format := json at: #format ifAbsent: 'raw'.
