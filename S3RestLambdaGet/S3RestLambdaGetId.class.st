@@ -6,22 +6,21 @@ Class {
 
 { #category : #accessing }
 S3RestLambdaGetId >> lambdaAction: json [
-	| id payload format response collection index |
+	| id payload format collection index |
 	id := json at: #id.
-	collection := (id findTokens:'/') first.
+	collection := (id findTokens: '/') first.
 	format := json at: #format ifAbsent: 'raw'.
-	index := indexes at: collection ifAbsentPut: [ self newIndexBucket: bucket collection: collection 	].
+	index := indexes
+		at: collection
+		ifAbsentPut: [ self newIndexBucket: bucket collection: collection ].
 	payload := index at: id.
-	response := Dictionary new.
-	response
-		at: #payload put: payload;
-		at: #id put: id.
-	format = 'html'
-		ifTrue: [ response
-				at: #payload
-				at: #content
-				put: (self toHtml: (response at: #payload at: #content)) ].
-	^ response
+	payload
+		at: #content
+		put:
+			(format = 'html'
+				ifTrue: [ self toHtml: (payload at: #content) ]
+				ifFalse: [ payload at: #content ]).
+	^ payload
 ]
 
 { #category : #indexes }
