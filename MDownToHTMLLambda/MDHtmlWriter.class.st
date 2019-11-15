@@ -28,10 +28,8 @@ MDHtmlWriter >> visitAnchor: aPMdAnchor with: aWriteStream [
 ]
 
 { #category : #'as yet unclassified' }
-MDHtmlWriter >> visitDocument: aPMdDocument with: aStream [ 
-	aStream << '<article>'. 
-	aPMdDocument contentsDo: [ :c | c accept: self with: aStream ].
-	aStream << '</article>'
+MDHtmlWriter >> visitDocument: aPMdDocument with: aStream [
+	aPMdDocument contentsDo: [ :c | c accept: self with: aStream ]
 ]
 
 { #category : #'as yet unclassified' }
