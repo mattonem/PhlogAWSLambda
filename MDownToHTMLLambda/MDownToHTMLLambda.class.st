@@ -8,5 +8,5 @@ Class {
 MDownToHTMLLambda >> lambdaAction: request [
 	| parsed |
 	parsed := PPMarkdown parse: request.
-	^ NeoJSONWriter toString: (MDHtmlWriter on: parsed)
+	^ MDHtmlWriter on: parsed
 ]
