@@ -27,6 +27,11 @@ Class {
 }
 
 { #category : #accessing }
+S3RestLambda >> bucket: aBucketMock [ 
+	bucket := aBucketMock
+]
+
+{ #category : #accessing }
 S3RestLambda >> bucketName [
 	^ OSEnvironment current at: 'BUCKET_NAME'
 ]
@@ -46,7 +51,7 @@ S3RestLambda >> initLambda [
 S3RestLambda >> initializeBucket: bucketName [
 	| s3 |
 	s3 := AWSS3 new.
-	bucket := s3 bucketNamed: bucketName
+	self bucket: (s3 bucketNamed: bucketName)
 ]
 
 { #category : #accessing }

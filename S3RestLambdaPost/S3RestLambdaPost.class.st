@@ -25,7 +25,7 @@ S3RestLambdaPost >> lambdaAction: json [
 { #category : #accessing }
 S3RestLambdaPost >> updateLastUpdateTime: collection [
 	bucket
-		atKey: collection , '/metadata'
+		atKey: collection , '/_metadata'
 		putObject:
 			(NeoJSONWriter
 				toString:
