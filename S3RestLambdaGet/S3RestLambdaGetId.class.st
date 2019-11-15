@@ -8,14 +8,14 @@ Class {
 S3RestLambdaGetId >> lambdaAction: json [
 	| id payload format response collection index |
 	Stdio stderr << 'start getId'.
-	id := json at: #id.
+"	id := json at: #id.
 	collection := (id findTokens:'/') first.
 	format := json at: #format ifAbsent: 'raw'.
 	index := indexes at: collection ifAbsentPut: [ self newIndexBucket: bucket collection: collection 	].
 	payload := index at: id.
-	response := Dictionary new.
+	response := Dictionary new."
 	response
-		at: #payload put: payload;
+		at: #payload put: 'payload';
 		at: #id put: id.
 	"format = 'html'
 		ifTrue: [ response
