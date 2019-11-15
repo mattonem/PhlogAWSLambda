@@ -19,18 +19,21 @@ S3RestLambdaGet >> initLambda [
 ]
 
 { #category : #accessing }
-S3RestLambdaGet >> lambdaAction: aRequest [
-	| json id payload format |
-	json := NeoJSONReader fromString: aRequest contents.
+S3RestLambdaGet >> lambdaAction: json [
+	| id payload format response |
 	id := json at: #id.
 	format := json at: #format ifAbsent: 'raw'.
 	payload := NeoJSONReader fromString: (bucket getObject: id).
-	json
+	response := Dictionary new.
+	response
 		at: #payload put: payload;
 		at: #id put: id.
 	format = 'html'
-		ifTrue: [ json := self toHtml: json ].
-	^ NeoJSONWriter toString: json 
+		ifTrue: [ response
+				at: #payload
+				at: #content
+				put: (self toHtml: (response at: #payload at: #content)) ].
+	^ response
 ]
 
 { #category : #accessing }
@@ -39,9 +42,9 @@ S3RestLambdaGet >> lambdaClient: aClient [
 ]
 
 { #category : #accessing }
-S3RestLambdaGet >> toHtml: aPayload [
-	aPayload at: #jsonPath put: '.payload.content'.
-	^ NeoJSONReader fromString: (lambdaClient
-		invokeRequest: 'MDownToHTMLLambda'
-		withPayload: (NeoJSONWriter toString: aPayload)) contents
+S3RestLambdaGet >> toHtml: aString [
+	
+	^ NeoJSONReader fromString: (lambdaClient 
+		invokeLambda: 'MDownToHTMLLambda'
+		withPayload: (NeoJSONWriter toString: aString)) contents
 ]
