@@ -32,7 +32,7 @@ S3RestIndex >> at: anId [
 	lastUpdate > self getCollectionLastUpdate
 		ifFalse: [ self updateDictionary ].
 	^ dictionary
-		at: anId
+		at: anId asString
 ]
 
 { #category : #accessing }
