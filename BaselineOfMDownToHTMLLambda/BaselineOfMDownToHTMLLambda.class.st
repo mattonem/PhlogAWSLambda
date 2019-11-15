@@ -22,5 +22,5 @@ BaselineOfMDownToHTMLLambda >> baseline: spec [
 						loads: #Core ].
 			spec
 				package: 'MDownToHTMLLambda'
-				with: [ spec requires: #('AwsLambda' NeoJSON PetitParser) ] ]
+				with: [ spec requires: #('AwsLambda' PetitParser) ] ]
 ]
