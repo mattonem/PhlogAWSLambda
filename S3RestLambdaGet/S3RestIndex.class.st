@@ -26,13 +26,17 @@ S3RestIndex >> accessor: aString [
 
 { #category : #accessing }
 S3RestIndex >> at: anId [
-	lastUpdate
-		ifNil: [ lastUpdate := DateAndTime now.
-			self updateDictionary ].
-	lastUpdate > self getCollectionLastUpdate
-		ifFalse: [ self updateDictionary ].
+	self validate.
+	^ dictionary at: anId asString
+]
+
+{ #category : #accessing }
+S3RestIndex >> at: anId ifPresent: aBlockClosure ifAbsent: aBlockClosure3 [
+	self validate.
 	^ dictionary
 		at: anId asString
+		ifPresent: aBlockClosure
+		ifAbsent: aBlockClosure3
 ]
 
 { #category : #accessing }
@@ -74,4 +78,13 @@ S3RestIndex >> updateDictionary [
 			| payload |
 			payload := NeoJSONReader fromString: (bucket getObject: anId).
 			dictionary at: (payload at: accessor) put: payload ]
+]
+
+{ #category : #accessing }
+S3RestIndex >> validate [
+	lastUpdate
+		ifNil: [ lastUpdate := DateAndTime now.
+			self updateDictionary ].
+	lastUpdate > self getCollectionLastUpdate
+		ifFalse: [ self updateDictionary ]
 ]
