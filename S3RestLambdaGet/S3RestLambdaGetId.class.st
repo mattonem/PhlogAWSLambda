@@ -17,11 +17,11 @@ S3RestLambdaGetId >> lambdaAction: json [
 	response
 		at: #payload put: payload;
 		at: #id put: id.
-	format = 'html'
+	"format = 'html'
 		ifTrue: [ response
 				at: #payload
 				at: #content
-				put: (self toHtml: (response at: #payload at: #content)) ].
+				put: (self toHtml: (response at: #payload at: #content)) ]."
 	^ response
 ]
 
