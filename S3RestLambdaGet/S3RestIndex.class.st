@@ -50,14 +50,19 @@ S3RestIndex >> collection: aString [
 ]
 
 { #category : #accessing }
-S3RestIndex >> getCollectionLastUpdate [
-	^ ((NeoJSONReader
+S3RestIndex >> getMetadata [
+	^ (NeoJSONReader
 		on: (bucket getObject: collection , '/_metadata') readStream)
 		for: #Metadata
 			do: [ :mapping | 
 			mapping subjectClass: NeoJSONObject.
 			(mapping mapAccessor: #lastUpdate) valueSchema: DateAndTime ];
-		nextAs: #Metadata) at: #lastUpdate
+		nextAs: #Metadata
+]
+
+{ #category : #processing }
+S3RestIndex >> indexIdFor: payload iteration: ite [
+	^ payload at: accessor
 ]
 
 { #category : #accessing }
@@ -66,25 +71,26 @@ S3RestIndex >> initialize [
 ]
 
 { #category : #processing }
-S3RestIndex >> updateDictionary [
-	| ids |
+S3RestIndex >> updateDictionaryRoot: rootId [
+	| id payload ite |
 	lastUpdate := DateAndTime now.
-	ids := ((bucket listObjectPrefix: collection) allElementsNamed: #Key)
-		collect: #contentString.
-	ids remove: collection, '/_metadata'.
+	id := rootId.
 	dictionary := OrderedDictionary new.
-	ids
-		do: [ :anId | 
-			| payload |
-			payload := NeoJSONReader fromString: (bucket getObject: anId).
-			dictionary at: (payload at: accessor) put: payload ]
+	ite := 1.
+	[ id isNotNil ]
+		whileFalse: [ payload := NeoJSONReader fromString: (bucket getObject: id).
+			dictionary at: (self indexIdFor: payload iteration: ite) put: payload.
+			ite := ite + 1.
+			id := payload at: #next ]
 ]
 
 { #category : #accessing }
 S3RestIndex >> validate [
+	| metadata |
 	lastUpdate
 		ifNil: [ lastUpdate := DateAndTime now.
 			self updateDictionary ].
-	lastUpdate > self getCollectionLastUpdate
-		ifFalse: [ self updateDictionary ]
+	metadata := self getMetadata.
+	lastUpdate > (metadata at: #lastUpdate)
+		ifFalse: [ self updateDictionaryRoot: (metadata at: #root) ]
 ]

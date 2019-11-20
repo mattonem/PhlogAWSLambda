@@ -14,8 +14,9 @@ S3RestLambdaPost >> lambdaAction: json [
 	payload := (json at: #payload).
 	id := collection, '/' , UUID new asString.
 	payload at: #id put: id.
+	payload at: #next put: nil.
 	bucket atKey: id putObject: (NeoJSONWriter toString: payload).
-	self updateLastUpdateTime: collection.
+	self updateMetadata: collection root: id.
 	result := NeoJSONObject new.
 	result
 		at: #payload put: payload;
@@ -24,7 +25,7 @@ S3RestLambdaPost >> lambdaAction: json [
 ]
 
 { #category : #accessing }
-S3RestLambdaPost >> updateLastUpdateTime: collection [
+S3RestLambdaPost >> updateMetadata: collection root: id. [
 	bucket
 		atKey: collection , '/_metadata'
 		putObject:
@@ -35,5 +36,5 @@ S3RestLambdaPost >> updateLastUpdateTime: collection [
 							{#lastUpdate.
 							DateAndTime now.
 							#root.
-							nil}))
+							id}))
 ]

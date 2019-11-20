@@ -1,19 +1,19 @@
 Class {
-	#name : #S3RestLambdaGetOrder,
+	#name : #S3RestLambdaGetLast,
 	#superclass : #S3RestLambdaGet,
 	#category : #S3RestLambdaGet
 }
 
-{ #category : #accessing }
-S3RestLambdaGetOrder >> lambdaAction: json [
-	| prefix index format order payload |
-	order := json at: #order.
+{ #category : #'instance creation' }
+S3RestLambdaGetLast >> lambdaAction: json [
+	| prefix index format payload |
+	
 	prefix := json at: #prefix.
 	format := json at: #format ifAbsent: 'raw'.
 	index := indexes
 		at: prefix
 		ifAbsentPut: [ self newIndexBucket: bucket collection: prefix ].
-	payload := index at: order.
+	payload := index last.
 	payload
 		at: #content
 		put:
@@ -23,7 +23,7 @@ S3RestLambdaGetOrder >> lambdaAction: json [
 	^ payload
 ]
 
-{ #category : #accessing }
-S3RestLambdaGetOrder >> newIndexBucket: aBucketMock collection: collection [ 
+{ #category : #'instance creation' }
+S3RestLambdaGetLast >> newIndexBucket: aBucketMock collection: collection [ 
 	^ S3RestIndexOrder in: aBucketMock for: collection value: #order.
 ]

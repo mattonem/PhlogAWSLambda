@@ -34,5 +34,5 @@ S3RestLambdaGetList >> lambdaAction: json [
 
 { #category : #accessing }
 S3RestLambdaGetList >> newIndexBucket: aBucketMock collection: collection [ 
-	^ S3RestIndex in: aBucketMock for: collection value: #order.
+	^ S3RestIndexOrder in: aBucketMock for: collection value: #order.
 ]
