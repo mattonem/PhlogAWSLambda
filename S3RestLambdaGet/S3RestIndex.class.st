@@ -27,14 +27,14 @@ S3RestIndex >> accessor: aString [
 { #category : #accessing }
 S3RestIndex >> at: anId [
 	self validate.
-	^ dictionary at: anId asString
+	^ dictionary at: anId
 ]
 
 { #category : #accessing }
 S3RestIndex >> at: anId ifPresent: aBlockClosure ifAbsent: aBlockClosure3 [
 	self validate.
 	^ dictionary
-		at: anId asString
+		at: anId 
 		ifPresent: aBlockClosure
 		ifAbsent: aBlockClosure3
 ]
