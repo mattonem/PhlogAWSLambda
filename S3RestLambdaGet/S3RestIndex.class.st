@@ -70,6 +70,13 @@ S3RestIndex >> initialize [
 	dictionary := OrderedDictionary new.
 ]
 
+{ #category : #accessing }
+S3RestIndex >> last [
+	^ dictionary values
+		ifEmpty: [ nil ]
+		ifNotEmpty: [ :values | values last ]
+]
+
 { #category : #processing }
 S3RestIndex >> updateDictionaryRoot: rootId [
 	| id payload ite |
