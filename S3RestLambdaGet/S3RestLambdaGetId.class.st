@@ -13,7 +13,7 @@ S3RestLambdaGetId >> lambdaAction: json [
 	index := indexes
 		at: collection
 		ifAbsentPut: [ self newIndexBucket: bucket collection: collection ].
-	payload := index at: id.
+	payload := (index at: id) copy.
 	payload
 		at: #content
 		put:

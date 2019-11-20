@@ -16,11 +16,12 @@ S3RestLambdaGetList >> lambdaAction: json [
 		at: prefix
 		ifAbsentPut: [ self newIndexBucket: bucket collection: prefix ].
 	start := offset asNumber.
-	end := start + limit asNumber.
+	end := start + limit asNumber - 1.
 	start to: end do: [ :i | 
 		index
 			at: i
-			ifPresent: [ :payload | 
+			ifPresent: [ :indexEntry | |payload|
+				payload := indexEntry copy. 
 				payload
 					at: #content
 					put:
