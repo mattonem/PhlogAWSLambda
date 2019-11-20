@@ -85,7 +85,7 @@ S3RestIndex >> updateDictionaryRoot: rootId [
 	dictionary := OrderedDictionary new.
 	ite := 1.
 	[ id isNotNil ]
-		whileFalse: [ payload := NeoJSONReader fromString: (bucket getObject: id).
+		whileTrue: [ payload := NeoJSONReader fromString: (bucket getObject: id).
 			dictionary at: (self indexIdFor: payload iteration: ite) put: payload.
 			ite := ite + 1.
 			id := payload at: #next ]
