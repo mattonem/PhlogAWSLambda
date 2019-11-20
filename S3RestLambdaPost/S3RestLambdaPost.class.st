@@ -8,7 +8,7 @@ Class {
 }
 
 { #category : #accessing }
-S3RestLambdaPost >> getMetadata:collection [
+S3RestLambdaPost >> getMetadata: collection [
 	^ (NeoJSONReader
 		on: (bucket getObject: collection , '/_metadata') readStream)
 		for: #Metadata
@@ -22,8 +22,8 @@ S3RestLambdaPost >> getMetadata:collection [
 { #category : #accessing }
 S3RestLambdaPost >> lambdaAction: json [
 	| id result payload collection metadata previousRootId |
-	collection := json at: #collection.
-	metadata := self getMetadata: #collection.
+	collection := json at: #prefix.
+	metadata := self getMetadata: collection.
 	previousRootId := metadata at: #root.
 	payload := json at: #payload.
 	id := collection , '/' , UUID new asString.
