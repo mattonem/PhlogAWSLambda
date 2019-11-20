@@ -72,6 +72,7 @@ S3RestIndex >> initialize [
 
 { #category : #accessing }
 S3RestIndex >> last [
+	self validate.
 	^ dictionary values
 		ifEmpty: [ nil ]
 		ifNotEmpty: [ :values | values last ]
@@ -94,10 +95,10 @@ S3RestIndex >> updateDictionaryRoot: rootId [
 { #category : #accessing }
 S3RestIndex >> validate [
 	| metadata |
+	metadata := self getMetadata.
 	lastUpdate
 		ifNil: [ lastUpdate := DateAndTime now.
-			self updateDictionary ].
-	metadata := self getMetadata.
+			self updateDictionaryRoot: (metadata at: #root) ].
 	lastUpdate > (metadata at: #lastUpdate)
 		ifFalse: [ self updateDictionaryRoot: (metadata at: #root) ]
 ]
