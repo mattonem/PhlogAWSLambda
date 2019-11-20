@@ -33,5 +33,7 @@ S3RestLambdaPost >> updateLastUpdateTime: collection [
 					(Dictionary
 						newFromPairs:
 							{#lastUpdate.
-							DateAndTime now}))
+							DateAndTime now.
+							#root.
+							nil}))
 ]
