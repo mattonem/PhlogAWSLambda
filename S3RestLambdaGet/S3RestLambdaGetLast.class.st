@@ -14,6 +14,7 @@ S3RestLambdaGetLast >> lambdaAction: json [
 		at: prefix
 		ifAbsentPut: [ self newIndexBucket: bucket collection: prefix ].
 	payload := index last.
+	payload ifNil: [ ^ nil ].
 	payload
 		at: #content
 		put:
