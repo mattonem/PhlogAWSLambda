@@ -6,16 +6,18 @@ Class {
 
 { #category : #accessing }
 S3RestLambdaGetList >> lambdaAction: json [
-	| offset limit prefix index result format |
+	| offset limit prefix index result format start end |
 	offset := json at: #offset ifAbsent: 1.
 	limit := json at: #limit ifAbsent: 10.
 	prefix := json at: #prefix.
 	format := json at: #format ifAbsent: 'raw'.
 	result := OrderedCollection new.
-	offset to: limit do: [ :i | 
-		index := indexes
-			at: prefix
-			ifAbsentPut: [ self newIndexBucket: bucket collection: prefix ].
+	index := indexes
+		at: prefix
+		ifAbsentPut: [ self newIndexBucket: bucket collection: prefix ].
+	start := index size - offset.
+	end := index size - offset - limit.
+	start to: end by: -1 do: [ :i | 
 		index
 			at: i
 			ifPresent: [ :payload | 
