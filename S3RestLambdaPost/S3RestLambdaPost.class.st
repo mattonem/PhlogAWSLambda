@@ -8,13 +8,27 @@ Class {
 }
 
 { #category : #accessing }
+S3RestLambdaPost >> getMetadata:collection [
+	^ (NeoJSONReader
+		on: (bucket getObject: collection , '/_metadata') readStream)
+		for: #Metadata
+			do: [ :mapping | 
+			mapping subjectClass: NeoJSONObject.
+			(mapping mapAccessor: #lastUpdate) valueSchema: DateAndTime.
+			mapping mapAccessor: #root ];
+		nextAs: #Metadata
+]
+
+{ #category : #accessing }
 S3RestLambdaPost >> lambdaAction: json [
-	| id result payload collection |
-	collection := (json at: #collection).
-	payload := (json at: #payload).
-	id := collection, '/' , UUID new asString.
+	| id result payload collection metadata previousRootId |
+	collection := json at: #collection.
+	metadata := self getMetadata: #collection.
+	previousRootId := metadata at: #root.
+	payload := json at: #payload.
+	id := collection , '/' , UUID new asString.
 	payload at: #id put: id.
-	payload at: #next put: nil.
+	payload at: #next put: previousRootId.
 	bucket atKey: id putObject: (NeoJSONWriter toString: payload).
 	self updateMetadata: collection root: id.
 	result := NeoJSONObject new.
