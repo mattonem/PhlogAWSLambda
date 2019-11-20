@@ -35,7 +35,7 @@ S3RestLambdaPost >> lambdaAction: json [
 	result
 		at: #payload put: payload;
 		at: #id put: id.
-	^ result asString
+	^ result
 ]
 
 { #category : #accessing }
