@@ -56,7 +56,8 @@ S3RestIndex >> getMetadata [
 		for: #Metadata
 			do: [ :mapping | 
 			mapping subjectClass: NeoJSONObject.
-			(mapping mapAccessor: #lastUpdate) valueSchema: DateAndTime ];
+			(mapping mapAccessor: #lastUpdate) valueSchema: DateAndTime.
+			mapping mapAccessor: #root ];
 		nextAs: #Metadata
 ]
 
