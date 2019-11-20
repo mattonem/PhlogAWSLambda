@@ -15,9 +15,9 @@ S3RestLambdaGetList >> lambdaAction: json [
 	index := indexes
 		at: prefix
 		ifAbsentPut: [ self newIndexBucket: bucket collection: prefix ].
-	start := index size - offset.
-	end := index size - offset - limit.
-	start to: end by: -1 do: [ :i | 
+	start := offset.
+	end := start + limit.
+	start to: end do: [ :i | 
 		index
 			at: i
 			ifPresent: [ :payload | 
