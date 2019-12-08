@@ -21,6 +21,11 @@ PhlogPost class >> neoJsonMapping: mapper [
 ]
 
 { #category : #'as yet unclassified' }
+PhlogPost >> content [ 
+	^ content
+]
+
+{ #category : #'as yet unclassified' }
 PhlogPost >> content: aString [ 
 	content := aString
 ]
