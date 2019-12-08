@@ -27,5 +27,5 @@ BaselineOfPhlogAWSLambda >> baseline: spec [
 				copyFrom: 'AWS'
 				with: [ spec loads: #('AWS-Lambda') ].
 			spec package: 'Phlog-Core' with: [ spec requires: #('AWS-S3') ].
-			spec package: 'Phlog-Core-Post' with: [ spec requires: #('Phlog-Core' 'AWS-S3') ]. ]
+			spec package: 'Phlog-Lambda-Post' with: [ spec requires: #('Phlog-Core' 'AWS-S3') ]. ]
 ]
