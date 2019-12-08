@@ -26,11 +26,16 @@ PhlogCollection >> initialize [
 ]
 
 { #category : #'as yet unclassified' }
+PhlogCollection >> offset: offset limit: limit [
+	^ posts from: offset to: (limit min: posts size)
+]
+
+{ #category : #'as yet unclassified' }
 PhlogCollection >> post: aString [ 
 	^ posts addFirst: (PhlogPost content: aString)
 ]
 
 { #category : #'as yet unclassified' }
 PhlogCollection >> searchId: anId [
-	^ posts detect: [:aPost | aPost id = anId ]
+	^ (posts detect: [:aPost | aPost id = anId ]) 
 ]

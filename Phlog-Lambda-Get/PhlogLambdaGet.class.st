@@ -9,11 +9,20 @@ Class {
 
 { #category : #accessing }
 PhlogLambdaGet >> lambdaAction: json [
-	| collection id post |
+	| collection result |
 	collection := json at: #collection.
-	id := json at: #id.
+	result := OrderedCollection new.
 	phlog := (NeoJSONReader on: (bucket getObject: 'phlog') readStream)
 		nextAs: Phlog.
-	post := (phlog collection: collection) searchId: id.
-	^ post
+	collection := phlog collection: collection.
+	json
+		at: #id
+		ifPresent: [ :id | result add: (collection searchId: id) ].
+	json
+		at: #offset
+		ifPresent: [ :offset | 
+			json
+				at: #limit
+				ifPresent: [ :limit | result add: (collection offset: offset limit: limit) ] ].
+	^ result
 ]
