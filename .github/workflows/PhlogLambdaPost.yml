@@ -12,7 +12,7 @@ jobs:
     - name: Download pharo
       run: wget -O- https://get.pharo.org/64/stable+vm | bash
     - name: Build image
-      run: ./pharo Pharo.image metacello install filetree://. BaselineOfPhlogAWSLambda
+      run: ./pharo Pharo.image metacello install filetree://. BaselineOfPhlogAWSLambda --groups=post
     - name: create bootstrap
       run: |
         echo -e '#!/bin/sh\n./pharo Pharo.image --no-default-preferences PhlogLambdaPost start' > bootstrap
