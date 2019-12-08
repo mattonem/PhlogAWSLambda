@@ -1,4 +1,4 @@
-name: Build&Deploy
+name: PhlogLambdaPost - Build&Deploy
  
 on: [push]
 
