@@ -1,4 +1,4 @@
-name: PhlogLambdaPost - Build&Deploy
+name: PhlogLambdaGet - Build&Deploy
  
 on: [push]
 
@@ -12,10 +12,10 @@ jobs:
     - name: Download pharo
       run: wget -O- https://get.pharo.org/64/stable+vm | bash
     - name: Build image
-      run: ./pharo Pharo.image metacello install filetree://. BaselineOfPhlogAWSLambda --groups=post
+      run: ./pharo Pharo.image metacello install filetree://. BaselineOfPhlogAWSLambda --groups=get
     - name: create bootstrap
       run: |
-        echo -e '#!/bin/sh\n./pharo Pharo.image --no-default-preferences PhlogLambdaPost start' > bootstrap
+        echo -e '#!/bin/sh\n./pharo Pharo.image --no-default-preferences PhlogLambdaGet start' > bootstrap
         chmod +x bootstrap 
     - name: zip
       run: zip -r function.zip *.image *.changes *.sources pharo pharo-vm bootstrap
@@ -28,7 +28,7 @@ jobs:
       uses: stcalica/update-lambda@0.0.2
       with:
         package: function.zip
-        function-name: PhlogLambdaPost
+        function-name: PhlogLambdaGet
         AWS_REGION: ${{ secrets.AWS_REGION }}
         AWS_SECRET_ID: ${{ secrets.AWS_SECRET_ID }}
         AWS_SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
