@@ -26,6 +26,11 @@ PhlogPost >> content: aString [
 ]
 
 { #category : #'as yet unclassified' }
+PhlogPost >> id [ 
+	^ id
+]
+
+{ #category : #'as yet unclassified' }
 PhlogPost >> initialize [
 	id := UUID new asString
 ]

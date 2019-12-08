@@ -29,3 +29,8 @@ PhlogCollection >> initialize [
 PhlogCollection >> post: aString [ 
 	^ posts addFirst: (PhlogPost content: aString)
 ]
+
+{ #category : #'as yet unclassified' }
+PhlogCollection >> searchId: anId [
+	^ posts findFirst: [:aPost | aPost id = anId ]
+]
