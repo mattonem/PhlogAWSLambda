@@ -32,5 +32,5 @@ PhlogCollection >> post: aString [
 
 { #category : #'as yet unclassified' }
 PhlogCollection >> searchId: anId [
-	^ posts findFirst: [:aPost | aPost id = anId ]
+	^ posts detect: [:aPost | aPost id = anId ]
 ]
