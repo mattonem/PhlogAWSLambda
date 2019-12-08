@@ -12,7 +12,7 @@ PhlogLambdaPost >> lambdaAction: json [
 	| content collection |
 	collection := json at: #collection.
 	content := json at: #content.
-	phlog := (NeoJSONReader on: (bucket objectAt: 'phlog') readStream)
+	phlog := (NeoJSONReader on: (bucket getObject: 'phlog') readStream)
 		nextAs: Phlog.
 	(phlog collection: collection) post: content.
 	bucket atKey: 'phlog' putObject: (NeoJSONWriter toString: phlog).
