@@ -2,6 +2,7 @@ Class {
 	#name : #PhlogPost,
 	#superclass : #Object,
 	#instVars : [
+		'id',
 		'content'
 	],
 	#category : #'Phlog-Core'
@@ -22,4 +23,9 @@ PhlogPost class >> neoJsonMapping: mapper [
 { #category : #'as yet unclassified' }
 PhlogPost >> content: aString [ 
 	content := aString
+]
+
+{ #category : #'as yet unclassified' }
+PhlogPost >> initialize [
+	id := UUID new asString
 ]
