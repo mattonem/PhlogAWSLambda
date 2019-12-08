@@ -27,9 +27,9 @@ BaselineOfPhlogAWSLambda >> baseline: spec [
 				with: [ spec loads: #('AWS-Lambda') ].
 			spec
 				package: 'S3RestLambda'
-				with: [ spec requires: #('AwsLambda' 'AWS-S3') ].
-			spec package: 'Phlog-Core' with: [ spec requires: #('AWS-S3') ].
-			spec
+					with: [ spec requires: #('AwsLambda' 'AWS-S3') ];
+				package: 'Phlog-Core' with: [ spec requires: #('AWS-S3') ];
 				package: 'Phlog-Lambda-Post'
-				with: [ spec requires: #('Phlog-Core' 'S3RestLambda') ] ]
+					with: [ spec requires: #('Phlog-Core' 'S3RestLambda') ].
+			spec group: #post with: 'Phlog-Lambda-Post' ]
 ]
