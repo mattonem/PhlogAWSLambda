@@ -11,10 +11,8 @@ Class {
 PhlogCollection class >> neoJsonMapping: mapper [
 	mapper
 		for: #ListOfPhlogPost
-		customDo: [ :mapping | 
-			mapping
-				listOfType: OrderedCollection;
-				listOfElementSchema: PhlogPost ].
+		customDo:
+			[ :mapping | mapping listOfType: OrderedCollection andElementSchema: PhlogPost ].
 	mapper
 		for: self
 		do:
