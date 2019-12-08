@@ -17,7 +17,7 @@ BaselineOfPhlogAWSLambda >> baseline: spec [
 			spec
 				baseline: 'AWS'
 				with: [ spec
-						repository: 'github://newapplesho/aws-sdk-smalltalk:AWS-Lambda/pharo-repository' ].
+						repository: 'github://newapplesho/aws-sdk-smalltalk' ].
 			spec
 				project: 'AWS-S3'
 				copyFrom: 'AWS'
