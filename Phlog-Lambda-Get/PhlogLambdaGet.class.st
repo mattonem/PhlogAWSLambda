@@ -51,7 +51,7 @@ PhlogLambdaGet >> lambdaAction: json [
 			f := [ 1 ] future.
 			result
 				do:
-					[ :aPost | f zip: [ aPost content: (self convertHtml: aPost content) ] future ].
+					[ :aPost | f := f zip: [ aPost content: (self convertHtml: aPost content) ] future ].
 			f waitForCompletion: 10 seconds ].
 	^ result
 ]
