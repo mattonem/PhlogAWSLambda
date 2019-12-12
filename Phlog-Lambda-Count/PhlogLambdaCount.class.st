@@ -9,11 +9,12 @@ Class {
 
 { #category : #accessing }
 PhlogLambdaCount >> lambdaAction: json [
-	| collection result |
-	collection := json at: #collection.
+	| result |
 	phlog := Phlog fromJson: (bucket getObject: 'phlog').
 	result := phlog.
-	collection
-		ifNotNil: [ result := phlog select: [ :post | post collection = collection ] ].
+	json
+		at: #collection
+		ifPresent:
+			[ :collection | result := phlog select: [ :post | post collection = collection ] ].
 	^ result size
 ]
