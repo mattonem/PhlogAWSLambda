@@ -27,7 +27,7 @@ PhlogCollection >> initialize [
 
 { #category : #'as yet unclassified' }
 PhlogCollection >> offset: offset limit: limit [
-	^ posts copyFrom: offset to: (limit min: posts size)
+	^ posts copyFrom: offset to: (offset + limit min: posts size)
 ]
 
 { #category : #'as yet unclassified' }
