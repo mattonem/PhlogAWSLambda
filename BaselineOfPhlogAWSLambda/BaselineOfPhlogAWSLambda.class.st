@@ -32,11 +32,14 @@ BaselineOfPhlogAWSLambda >> baseline: spec [
 				package: 'S3RestLambda'
 					with: [ spec requires: #('AwsLambda' 'AWS-S3') ];
 				package: 'Phlog-Core' with: [ spec requires: #('AWS-S3') ];
+				package: 'Phlog-Lambda-Count'
+					with: [ spec requires: #('Phlog-Core' 'S3RestLambda') ];
 				package: 'Phlog-Lambda-Post'
 					with: [ spec requires: #('Phlog-Core' 'S3RestLambda') ];
 				package: 'Phlog-Lambda-Get'
 					with: [ spec requires: #('Phlog-Core' 'S3RestLambda' 'TaskIt' 'AWS-Lambda') ].
 			spec
 				group: #post with: 'Phlog-Lambda-Post';
+				group: #count with: 'Phlog-Lambda-Count';
 				group: #get with: 'Phlog-Lambda-Get' ]
 ]
