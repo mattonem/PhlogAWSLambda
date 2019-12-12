@@ -15,6 +15,7 @@ PhlogLambdaCount >> lambdaAction: json [
 	json
 		at: #collection
 		ifPresent:
-			[ :collection | result := phlog select: [ :post | post collection = collection ] ].
+			[ :collection | result := phlog select: [ :post | post collection = collection ] ]
+		ifAbsent: [  ].
 	^ result size
 ]
