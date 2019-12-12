@@ -12,9 +12,8 @@ PhlogLambdaPost >> lambdaAction: json [
 	| content collection |
 	collection := json at: #collection.
 	content := json at: #content.
-	phlog := (NeoJSONReader on: (bucket getObject: 'phlog') readStream)
-		nextAs: Phlog.
-	(phlog collection: collection) post: content.
-	bucket atKey: 'phlog' putObject: (NeoJSONWriter toString: phlog).
+	phlog := Phlog fromJson: (bucket getObject: 'phlog').
+	phlog add: (PhlogPost collection: collection content: content ).
+	bucket atKey: 'phlog' putObject: phlog serialize.
 	^ phlog
 ]

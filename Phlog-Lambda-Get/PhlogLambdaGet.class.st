@@ -30,28 +30,29 @@ PhlogLambdaGet >> initLambda [
 
 { #category : #accessing }
 PhlogLambdaGet >> lambdaAction: json [
-	| collection result format |
+	| result format collection |
 	collection := json at: #collection.
 	format := json at: #format ifAbsent: [ #raw ].
 	result := OrderedCollection new.
-	phlog := (NeoJSONReader on: (bucket getObject: 'phlog') readStream)
-		nextAs: Phlog.
-	collection := phlog collection: collection.
+	phlog := Phlog fromJson: (bucket getObject: 'phlog').
 	json
 		at: #id
-		ifPresent: [ :id | result add: (collection searchId: id) ].
+		ifPresent: [ :id | result addAll: (phlog select: [ :post | post id = id ]) ].
 	json
 		at: #offset
 		ifPresent: [ :offset | 
 			json
 				at: #limit
-				ifPresent: [ :limit | result addAll: (collection offset: offset limit: limit) ] ].
+				ifPresent: [ :limit | 
+					result
+						addAll: (phlog select: [ :post | post collection = collection ]) ] ].
 	format = #html
 		ifTrue: [ | f |
 			f := [ 1 ] future.
 			result
-				do:
-					[ :aPost | f := f zip: [ aPost content: (self convertHtml: aPost content) ] future ].
+				do: [ :aPost | 
+					f := f
+						zip: [ aPost content: (self convertHtml: aPost content) ] future ].
 			f waitForCompletion: 10 seconds ].
 	^ result
 ]

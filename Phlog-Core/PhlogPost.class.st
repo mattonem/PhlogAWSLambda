@@ -3,10 +3,19 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'id',
-		'content'
+		'content',
+		'collection'
 	],
 	#category : #'Phlog-Core'
 }
+
+{ #category : #'as yet unclassified' }
+PhlogPost class >> collection: aCollection content: aString [ 
+	^ self new
+		collection: aCollection;
+		content: aString;
+		yourself
+]
 
 { #category : #'as yet unclassified' }
 PhlogPost class >> content: aString [
@@ -18,6 +27,16 @@ PhlogPost class >> content: aString [
 { #category : #'as yet unclassified' }
 PhlogPost class >> neoJsonMapping: mapper [
 	mapper for: self do: [ :mapping | mapping mapAllInstVars ]
+]
+
+{ #category : #'as yet unclassified' }
+PhlogPost >> collection [
+	^ collection
+]
+
+{ #category : #'as yet unclassified' }
+PhlogPost >> collection: aCollection [
+	collection := aCollection
 ]
 
 { #category : #'as yet unclassified' }
