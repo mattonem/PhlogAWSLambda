@@ -41,6 +41,11 @@ Phlog >> select: aBlock [
 ]
 
 { #category : #initialization }
+Phlog >> select: aBlock limit: aNumber [
+	^ files select: aBlock limit: aNumber
+]
+
+{ #category : #initialization }
 Phlog >> serialize [
 	^ NeoJSONWriter toString: self
 ]

@@ -4,7 +4,8 @@ Class {
 	#instVars : [
 		'id',
 		'content',
-		'collection'
+		'collection',
+		'order'
 	],
 	#category : #'Phlog-Core'
 }
@@ -56,5 +57,16 @@ PhlogPost >> id [
 
 { #category : #'as yet unclassified' }
 PhlogPost >> initialize [
-	id := UUID new asString
+	id := UUID new asString.
+	order := 1.
+]
+
+{ #category : #'as yet unclassified' }
+PhlogPost >> order [ 
+	^ order
+]
+
+{ #category : #'as yet unclassified' }
+PhlogPost >> order: anInterger [ 
+	order := anInterger 
 ]

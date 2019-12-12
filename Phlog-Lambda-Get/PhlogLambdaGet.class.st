@@ -45,7 +45,12 @@ PhlogLambdaGet >> lambdaAction: json [
 				at: #limit
 				ifPresent: [ :limit | 
 					result
-						addAll: (phlog select: [ :post | post collection = collection ]) ] ].
+						addAll:
+							(phlog
+								select: [ :post | 
+									post collection = collection
+										and: [ post order > offset and: (post order < offset) + limit ] ]
+								limit: limit) ] ].
 	format = #html
 		ifTrue: [ | f |
 			f := [ 1 ] future.
